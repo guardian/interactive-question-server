@@ -16,7 +16,7 @@ app.use(function *(next){
 app.use(function *(next){
 	if (this.method === "POST") {
 		if (this.request.body.answers) {
-			db.saveAnswers(this.request.body.answers).then(next)
+			db.saveAnswers(this.request.query.key || 'answers', this.request.body.answers).then(next)
 			this.body = 'success\n';
 		} else {
 			this.status = 500;
